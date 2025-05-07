@@ -5,11 +5,10 @@ public:
         for(auto i : piles){
             pq.push(i);
         }
-        while(k>0){
+        while(k--){
             int temp=pq.top();
             pq.pop();
-            pq.push((temp-temp/2));
-            k--;
+            pq.push((temp-floor(temp/2)));
         }
         int sum=0;
         while(!pq.empty()){
