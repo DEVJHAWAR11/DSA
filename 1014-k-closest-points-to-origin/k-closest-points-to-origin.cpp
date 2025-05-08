@@ -7,17 +7,11 @@ class compare{
 
 class Solution {
 public:
-
-    vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
-        vector<pair<vector<int>,float>>PairArr;
-        float dist=0;
-        for(auto i : points){
-            dist=sqrt((pow(i[0],2)+pow(i[1],2)));
-            PairArr.push_back({i,dist});
-        }
+    vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {        
         priority_queue<pair<vector<int>,float>,vector<pair<vector<int>,float>>,compare>minHeap;
-        for(auto i : PairArr){
-            minHeap.push(i);
+        for(auto i : points){
+            float dist=sqrt((pow(i[0],2)+pow(i[1],2)));
+            minHeap.push({i,dist});
         }
         vector<vector<int>>ans;
         while(!minHeap.empty() && k>0){
