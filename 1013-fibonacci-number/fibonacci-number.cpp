@@ -1,3 +1,4 @@
+//--------------Normal Recursion---------------------
 // class Solution {
 // public:
 //     int fib(int n) {
@@ -9,7 +10,7 @@
 //     }
 // };
 
-//top-down arrproach
+//--------------top-down arrproach-------------------
 // class Solution {
 // public:
 //     int solveRecMemo(int n , vector<int>&dp){
@@ -33,29 +34,48 @@
 // };
 
 
-//tabulation method
+//---------------tabulation method--------------------
+// class Solution {
+// public:
+//     int fib(int n){
+//         //1-->create a dp array
+//         vector<int>dp(n+1,-1);
 
+//         //2-->fill initial data by base case
+//         dp[0]=0;
+//         if(n==0) 
+//             return dp[0];
+//         dp[1]=1;
+
+//         //3--->fill rest of array using recursive relation
+//         //size -->n+1--->0 to n
+//         //0 ,1 filled --> so index from 2 to n
+//         for(int i=2;i<=n;i++){
+//             dp[i]=dp[i-1]+dp[i-2];
+//         }
+//         return dp[n];
+
+//     }
+// };
+
+//---------------space optimization -----------------
 class Solution {
 public:
     int fib(int n){
-        //1-->create a dp array
-        vector<int>dp(n+1,-1);
-
-        //2-->fill initial data by base case
-        dp[0]=0;
+        int ans=0;
+        int prev=0;
         if(n==0) 
-            return dp[0];
-        dp[1]=1;
-
-        //3--->fill rest of array using recursive relation
-        //size -->n+1--->0 to n
-        //0 ,1 filled --> so index from 2 to n
+            return 0;
+        int curr=1;
+        if(n==1)
+            return 1;
+        
         for(int i=2;i<=n;i++){
-            dp[i]=dp[i-1]+dp[i-2];
+            ans=prev+curr;
+            prev=curr;
+            curr=ans;
         }
-        return dp[n];
+        return ans;
 
     }
 };
-
-
