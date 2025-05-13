@@ -42,29 +42,41 @@
 // };
 
 
+// class Solution {
+// public:
+//     int solveTabulation(vector<int>&nums,vector<int>&dp){
+//         int include=0,exclude=0;
+
+//         if(nums.size()==1) return nums[0];
+
+//         dp[0]=nums[0];
+//         dp[1]=max(nums[1],nums[0]);     //to handle case when two elemenst and first > second
+
+//         for(int i=2;i<nums.size();i++){
+//             include=nums[i] + dp[i-2];
+//             exclude = 0 + dp[i-1];
+//             dp[i] = max(include , exclude);
+//         }
+        
+//         return dp[nums.size()-1];
+//     }
+
+//     int rob(vector<int>& nums) { 
+//         vector<int>dp(nums.size(),-1);
+//         int ans=solveTabulation(nums,dp);
+//         return ans;
+//     }
+// };
+
 class Solution {
 public:
-    int solveTabulation(vector<int>&nums,vector<int>&dp){
-        int include=0,exclude=0;
-
-        if(nums.size()==1) return nums[0];
-
-        dp[0]=nums[0];
-        dp[1]=max(nums[1],nums[0]);     //to handle case when two elemenst and first > second
-
-        for(int i=2;i<nums.size();i++){
-            include=nums[i] + dp[i-2];
-            exclude = 0 + dp[i-1];
-            dp[i] = max(include , exclude);
-        }
-        
-        return dp[nums.size()-1];
-    }
-
     int rob(vector<int>& nums) { 
-        vector<int>dp(nums.size(),-1);
-        int ans=solveTabulation(nums,dp);
-        return ans;
+        int prev=0,curr=0;
+        for(auto num : nums){
+            int temp=max(curr,prev+num);
+            prev=curr;
+            curr=temp;
+        }
+        return curr;
     }
 };
-
