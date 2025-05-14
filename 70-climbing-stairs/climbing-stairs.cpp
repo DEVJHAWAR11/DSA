@@ -14,18 +14,36 @@
 //     }
 // };
 
+// class Solution {
+// public:
+//     int usingMemo(int n ,vector<int>&dp){
+//         if(n==0 || n==1) return 1;
+
+//         if(dp[n]!=-1) return dp[n];
+//         dp[n]=usingMemo(n-1,dp) + usingMemo(n-2,dp);
+//         return dp[n];
+//     }
+
+//     int climbStairs(int n) {
+//         vector<int>dp(n+1,-1);
+//         return usingMemo(n,dp);
+//     }
+// };
+
 class Solution {
 public:
-    int usingMemo(int n ,vector<int>&dp){
-        if(n==0 || n==1) return 1;
-
-        if(dp[n]!=-1) return dp[n];
-        dp[n]=usingMemo(n-1,dp) + usingMemo(n-2,dp);
+    int usingTabu(int n,vector<int>&dp){
+        dp[0]=1;
+        dp[1]=1;
+        if(n==0 || n==1) return dp[0];
+        for(int i=2;i<=n;i++){
+            dp[i]=dp[i-1]+dp[i-2];
+        }
         return dp[n];
     }
 
     int climbStairs(int n) {
-        vector<int>dp(n+1,-1);
-        return usingMemo(n,dp);
+       vector<int>dp(n+1,-1);
+       return usingTabu(n,dp); 
     }
 };
