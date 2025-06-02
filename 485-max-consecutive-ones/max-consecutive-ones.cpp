@@ -9,7 +9,6 @@ public:
             }
             else count++;
         }
-        if(count) maxCount=max(maxCount,count);
-        return maxCount;
+        return max(maxCount,count);
     }
 };
