@@ -1,7 +1,6 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-
         //o(n2)
         // int n=nums.size();
         // for(int i=0;i<n;i++){
@@ -14,29 +13,22 @@ public:
         // return {};
 
         //two-pointer
-        vector<pair<int,int>> numsWithoriIndex;
-
+        vector<pair<int,int>>indexElement;
         for(int i=0;i<nums.size();i++){
-            numsWithoriIndex.push_back({nums[i],i});
+            indexElement.push_back({nums[i],i});
         }
+        sort(indexElement.begin(),indexElement.end());
 
-        sort(numsWithoriIndex.begin(),numsWithoriIndex.end());
+        int start=0,end=indexElement.size()-1;
 
-        int l=0;
-        int h=numsWithoriIndex.size()-1;
-
-
-        while(l<h){
-            int sum=numsWithoriIndex[l].first+numsWithoriIndex[h].first;
-
-            if(sum==target)
-                return {numsWithoriIndex[l].second,numsWithoriIndex[h].second};
-            else if(sum>target)
-                h--;
-            else 
-                l++;
+        while(start < end){
+            if(indexElement[start].first + indexElement[end].first == target)
+                return {indexElement[start].second,indexElement[end].second};
+            else if(indexElement[start].first + indexElement[end].first < target)
+                start++;
+            else
+                end--;
         }
         return {};
-
     }
 };
