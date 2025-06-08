@@ -4,6 +4,7 @@ public:
         int i=0,j=0,newK=2*k+1;
         long long sum=0;
         vector<int>ans(nums.size(),-1);
+        if(nums.size() < newK) return ans;
         while(j < nums.size()){
             sum+=nums[j];
             //if(j-k < 0) ans[j]=-1;
