@@ -6,7 +6,7 @@ public:
         vector<int>ans(nums.size(),-1);
         while(j < nums.size()){
             sum+=nums[j];
-            if(j-k < 0) ans[j]=-1;
+            //if(j-k < 0) ans[j]=-1;
             
 
             if(j-i+1 < newK) j++;
