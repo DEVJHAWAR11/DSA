@@ -14,6 +14,9 @@ public:
                 op.pop_back();
                 sum-=candidates[i];
             }
+            else{
+                return;
+            }
         }
     }
 
