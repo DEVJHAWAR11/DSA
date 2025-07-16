@@ -32,37 +32,25 @@ public:
             
     //     }
     // }
-
-    bool subsetSum(vector<int>nums,int sum,int n,vector<vector<int>>&dp){
-        for(int i=0;i<n+1;i++){
-            for(int j=0;j<sum+1;j++){
-                dp[i][0]=true;
-            }
-        }
-
-        for(int i=1;i<n+1;i++){
-            for(int j=1;j<sum+1;j++){
-                if(nums[i-1]<=j){
-                    bool include=dp[i-1][j-nums[i-1]];
-                    bool exclude =dp[i-1][j];
-                    dp[i][j]= include || exclude;
-                }
-                else{
-                    dp[i][j]= dp[i-1][j];
-                }
-            }
-        }
-        return dp[n][sum];
-    }
-
     bool canPartition(vector<int>& nums) {
-        int sum=0;
-        int n=nums.size();
+        int sum=0,n=nums.size();
         for(auto i : nums){
             sum+=i;
         }
-        vector<vector<int>>dp(n+1,vector<int>(sum/2+1,false));
         if(sum&1) return false;
-        else return subsetSum(nums,sum/2,n,dp);
+        vector<bool>prev(sum/2+1,false);
+        vector<bool>curr(sum/2+1,false);
+        
+        prev[0]=true;
+        for(int i=1;i<n+1;i++){
+            for(int j=0;j<sum/2+1;j++){
+                if(nums[i-1] <=j)
+                    curr[j]=prev[j-nums[i-1]] || prev[j];
+                else
+                    curr[j]=prev[j];
+            }
+            prev=curr;
+        }
+        return prev[sum/2];
     }
 };
