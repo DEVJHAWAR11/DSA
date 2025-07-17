@@ -15,44 +15,53 @@
 //     }
 // };
 
+// class Solution {
+// public:
+//     int rob(vector<int>& nums) {  
+//         int n=nums.size();
+//         vector<int>dp(n+1,-1);
+//         if(n==0) return 0;
+//         dp[0]=0,dp[1]=nums[0];
+
+//         for(int i=2;i<n+1;i++){
+//             dp[i]=max(nums[i-1]+dp[i-2],dp[i-1]);
+//         }
+//         return dp[n];
+//     }
+// };
+
+// class Solution {
+// public:
+//     int rob(vector<int>& nums) {  
+//         int n=nums.size();
+//         vector<int>dp(n+1,-1);
+//         if(n==0) return 0;
+//         dp[0]=0,dp[1]=nums[0];
+
+//         for(int i=2;i<n+1;i++){
+//             dp[i]=max(nums[i-1]+dp[i-2],dp[i-1]);
+//         }
+//         return dp[n];
+//     }
+// };
+
 class Solution {
 public:
     int rob(vector<int>& nums) {  
         int n=nums.size();
         vector<int>dp(n+1,-1);
         if(n==0) return 0;
-        dp[0]=0,dp[1]=nums[0];
+        int prev2=0,prev1=nums[0],curr=0;
 
         for(int i=2;i<n+1;i++){
-            dp[i]=max(nums[i-1]+dp[i-2],dp[i-1]);
+            curr=max(nums[i-1]+prev2,prev1);
+            prev2=prev1;
+            prev1=curr;
         }
-        return dp[n];
+        return prev1;
     }
 };
 
-//Memoisation
-// class Solution {
-// public:
-//     int solveMemoisation(vector<int>&nums,vector<int>&dp , int i){
-//         int include=0,exclude=0;
-//         //base case
-//         if(i >= nums.size()) return 0;
-
-//         if(dp[i]!=-1) return dp[i];
-
-//         include=nums[i] + solveMemoisation(nums,dp,i+2);
-//         exclude = 0 + solveMemoisation(nums,dp,i+1);
-//         dp[i] = max(include , exclude);
-//         return dp[i];
-//     }
-
-//     int rob(vector<int>& nums) {
-//         int i=0;  
-//         vector<int>dp(nums.size(),-1);
-//         int ans=solveMemoisation(nums,dp,i);
-//         return ans;
-//     }
-// };
 
 
 // class Solution {
