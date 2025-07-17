@@ -1,17 +1,32 @@
+// class Solution {
+// public:
+//     int solveRec(vector<int>&nums,int n,vector<int>&dp){
+//         if(n==0) return 0;
+//         if(n==1) return nums[0];
+//         if(dp[n]!=-1) return dp[n];
+//         return dp[n] = max(nums[n-1]+solveRec(nums,n-2,dp), solveRec(nums,n-1,dp));
+
+//     }
+
+//     int rob(vector<int>& nums) {  
+//         int n=nums.size();
+//         vector<int>dp(n+1,-1);
+//         return solveRec(nums,n,dp);
+//     }
+// };
+
 class Solution {
 public:
-    int solveRec(vector<int>&nums,int n,vector<int>&dp){
-        if(n==0) return 0;
-        if(n==1) return nums[0];
-        if(dp[n]!=-1) return dp[n];
-        return dp[n] = max(nums[n-1]+solveRec(nums,n-2,dp), solveRec(nums,n-1,dp));
-
-    }
-
     int rob(vector<int>& nums) {  
         int n=nums.size();
         vector<int>dp(n+1,-1);
-        return solveRec(nums,n,dp);
+        if(n==0) return 0;
+        dp[0]=0,dp[1]=nums[0];
+
+        for(int i=2;i<n+1;i++){
+            dp[i]=max(nums[i-1]+dp[i-2],dp[i-1]);
+        }
+        return dp[n];
     }
 };
 
