@@ -1,21 +1,19 @@
-// class Solution {
-// public:
-//     int solveRec(vector<int>&nums,int i){
-//         int ans1=0,ans2=0;
-//         if(i>=nums.size()){
-//             return 0; 
-//         }
-//         ans1=nums[i]+solveRec(nums,i+2);
-//         ans2=0 + solveRec(nums,i+1);
-//         return max(ans1,ans2);
-//     }
+class Solution {
+public:
+    int solveRec(vector<int>&nums,int n,vector<int>&dp){
+        if(n==0) return 0;
+        if(n==1) return nums[0];
+        if(dp[n]!=-1) return dp[n];
+        return dp[n] = max(nums[n-1]+solveRec(nums,n-2,dp), solveRec(nums,n-1,dp));
 
-//     int rob(vector<int>& nums) {  
-//         int i=0;   
-//         int ans = solveRec(nums,i);
-//         return ans;
-//     }
-// };
+    }
+
+    int rob(vector<int>& nums) {  
+        int n=nums.size();
+        vector<int>dp(n+1,-1);
+        return solveRec(nums,n,dp);
+    }
+};
 
 //Memoisation
 // class Solution {
@@ -68,15 +66,15 @@
 //     }
 // };
 
-class Solution {
-public:
-    int rob(vector<int>& nums) { 
-        int prev=0,curr=0;
-        for(auto num : nums){
-            int temp=max(curr,prev+num);
-            prev=curr;
-            curr=temp;
-        }
-        return curr;
-    }
-};
+// class Solution {
+// public:
+//     int rob(vector<int>& nums) { 
+//         int prev=0,curr=0;
+//         for(auto num : nums){
+//             int temp=max(curr,prev+num);
+//             prev=curr;
+//             curr=temp;
+//         }
+//         return curr;
+//     }
+// };
