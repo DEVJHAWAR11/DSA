@@ -73,23 +73,45 @@
 
 
 
+// class Solution {
+// public:
+
+//     int lengthOfLIS(vector<int>& nums) {
+//         int n=nums.size();
+//         vector<vector<int>>dp(n+1,vector<int>(n+1,0));
+
+//         for(int curr=n-1; curr >=0;curr--){
+//             for(int prev=curr-1;prev >=-1;prev--){
+//                 if(prev==-1 || nums[curr] > nums[prev]){
+//                     dp[curr][prev+1]=max(1+dp[curr+1][curr+1],dp[curr+1][prev+1]);
+//                 }
+//                 else{
+//                     dp[curr][prev+1]=dp[curr+1][prev+1];
+//                 }
+//             }
+//         }
+//         return dp[0][0];
+//     }
+// };
+
+
 class Solution {
 public:
-
     int lengthOfLIS(vector<int>& nums) {
         int n=nums.size();
-        vector<vector<int>>dp(n+1,vector<int>(n+1,0));
+        vector<int>curr(n+1,0),next(n+1,0);
 
-        for(int curr=n-1; curr >=0;curr--){
-            for(int prev=curr-1;prev >=-1;prev--){
-                if(prev==-1 || nums[curr] > nums[prev]){
-                    dp[curr][prev+1]=max(1+dp[curr+1][curr+1],dp[curr+1][prev+1]);
+        for(int i=n-1; i>=0;i--){
+            for(int prev=i-1;prev >=-1;prev--){
+                if(prev==-1 || nums[i] > nums[prev]){
+                    curr[prev+1]=max(1+next[i+1],next[prev+1]);
                 }
                 else{
-                    dp[curr][prev+1]=dp[curr+1][prev+1];
+                    curr[prev+1]=next[prev+1];
                 }
             }
+            next=curr;
         }
-        return dp[0][0];
+        return curr[0];
     }
 };
