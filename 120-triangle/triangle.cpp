@@ -19,7 +19,7 @@ public:
         int n=triangle.size();
         vector<vector<int>>dp(n,vector<int>(n,-1));
         for(int i=n-1;i>=0;i--){
-            for(int j=i;j>=0;j--){
+            for(int j=i;j>=0;j--){             //as a triangle for each row i has i no of elemenst
                 if(i==n-1) dp[n-1][j]=triangle[n-1][j];
                 else {
                     dp[i][j] = triangle[i][j]+min(dp[i+1][j],dp[i+1][j+1]);
