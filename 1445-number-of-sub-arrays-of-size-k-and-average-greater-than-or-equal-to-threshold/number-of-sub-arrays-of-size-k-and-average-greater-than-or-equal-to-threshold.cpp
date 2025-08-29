@@ -6,7 +6,7 @@ public:
             sum+=arr[j];
             if(j-i+1 < k ) j++;
             else if(j-i+1 ==k){
-                if((double)sum/k >= threshold)
+                if(sum >= k * threshold)
                   cnt++;
                 sum-=arr[i];
                 i++,j++; 
