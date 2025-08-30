@@ -1,20 +1,24 @@
 class Solution {
 public:
     int maximumUniqueSubarray(vector<int>& nums) {
-        int i=0,j=0,maxi=0,sum=0;
         unordered_map<int,int>mpp;
+        int i=0,j=0,sum=0,ans=INT_MIN;
         while(j < nums.size()){
             mpp[nums[j]]++;
             sum+=nums[j];
-            while(mpp[nums[j]] > 1){
-                    sum-=nums[i];
+
+            if(mpp[nums[j]] > 1){
+                while(mpp[nums[j]] > 1){
                     mpp[nums[i]]--;
-                    i++; 
+                    if(mpp[nums[i]]==0)
+                    mpp.erase(nums[i]);
+                    sum-=nums[i];
+                    i++;
+                } 
             }
-            if(mpp[nums[j]]==1)
-                maxi=max(maxi,sum);
+            ans=max(ans,sum);
             j++;
         }
-        return maxi;
+        return ans;
     }
 };
